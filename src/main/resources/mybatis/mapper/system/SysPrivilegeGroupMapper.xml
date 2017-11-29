@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.clj.reptilehouse.system.dao.SysPrivilegeGroupDao" >
+  <resultMap id="BaseResultMap" type="com.clj.reptilehouse.system.entity.SysPrivilegeGroup" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="tree_code" property="treeCode" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="BIGINT" />
+    <result column="modified_time" property="modifiedTime" jdbcType="BIGINT" />
+    <collection property="itemList" ofType="com.clj.reptilehouse.system.entity.SysPrivilegeItem" column="grpId">  
+	    <result column="item_id" property="id" jdbcType="BIGINT" />
+	    <result column="grp_id" property="grpId" jdbcType="BIGINT" />
+	    <result column="item_code" property="code" jdbcType="VARCHAR" />
+	    <result column="item_name" property="name" jdbcType="VARCHAR" />  
+	    <result column="is_role_dis" property="isRoleDis" jdbcType="BIT" />
+	</collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, `name`, parent_id, tree_code, `status`, remark, created_time, modified_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_privilege_group
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_privilege_group
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.clj.reptilehouse.system.entity.SysPrivilegeGroup" >
+    insert into sys_privilege_group (id, `name`, parent_id, 
+      tree_code, `status`, remark, 
+      created_time, modified_time)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, 
+      #{treeCode,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{remark,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=BIGINT}, #{modifiedTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clj.reptilehouse.system.entity.SysPrivilegeGroup" >
+    insert into sys_privilege_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      id,
+      `name`,
+      parent_id,
+      tree_code,
+      `status`,
+      remark,
+      created_time,
+      modified_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=BIGINT},
+      #{name,jdbcType=VARCHAR},
+      #{parentId,jdbcType=BIGINT},
+      #{treeCode,jdbcType=VARCHAR},
+      #{status,jdbcType=BIT},
+      #{remark,jdbcType=VARCHAR},
+      #{createdTime,jdbcType=BIGINT},
+      #{modifiedTime,jdbcType=BIGINT},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clj.reptilehouse.system.entity.SysPrivilegeGroup" >
+    update sys_privilege_group
+    <set >
+      <if test="name != null" >
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="treeCode != null" >
+        tree_code = #{treeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        `status` = #{status,jdbcType=BIT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=BIGINT},
+      </if>
+      <if test="modifiedTime != null" >
+        modified_time = #{modifiedTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clj.reptilehouse.system.entity.SysPrivilegeGroup" >
+    update sys_privilege_group
+    set `name` = #{name,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      tree_code = #{treeCode,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=BIT},
+      remark = #{remark,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=BIGINT},
+      modified_time = #{modifiedTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- my start -->
+  <select id="list" parameterType="string" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/> from sys_privilege_group
+		<where>${_parameter}</where>
+  </select>
+  <delete id="deleteBy" parameterType="string">
+		delete from sys_privilege_group
+		<where>${_parameter}</where>
+  </delete>
+  <select id="selectMaxCode" parameterType="string" resultType="java.lang.String">
+		select max(tree_code) from sys_privilege_group
+		<where>${_parameter}</where>
+  </select>
+  <select id="selectMaxNo" parameterType="long" resultType="int">
+  		select max(`no`) from sys_privilege_group 
+  </select>
+  <select id="selectByIsRoleDis" resultMap="BaseResultMap">
+  		select <include refid="Base_Column_List"/> from sys_privilege_group g
+  		where g.status=1 and g.id in 
+  		( select item.grp_id from sys_privilege_item item where item.status=1 and item.is_role_dis=1) 
+  		order by g.tree_code
+  </select>	
+  <select id="selectByUserType" resultMap="BaseResultMap">
+  		select <include refid="Base_Column_List"/> from sys_privilege_group
+  		where status=1 and id in ( select priv.grp_id from sys_privilege_item priv where priv.status=1 
+  		<choose>
+			<when test="userType==9"> and priv.is_dv=1 </when> 
+			<otherwise> and priv.is_bs=1 </otherwise> 
+		</choose> 
+  		) order by tree_code
+  </select>
+  <select id="selectByItemIds" resultMap="BaseResultMap">
+  		select grp.*,item.id as item_id,item.grp_id as grp_id,
+  		item.code as item_code,item.name as item_name,item.is_role_dis as is_role_dis
+  		from sys_privilege_group grp,sys_privilege_item item
+  		where grp.id=item.grp_id and grp.status=1 and grp.id in 
+  		( select priv.grp_id from sys_privilege_item priv where priv.status=1 and priv.id in (${ids})
+  		) order by grp.tree_code
+  </select>
+  <select id="selectByUid" resultMap="BaseResultMap">
+  		select grp.*,item.id as item_id,item.grp_id as grp_id,
+  		item.code as item_code,item.name as item_name,item.is_role_dis as is_role_dis
+  		from sys_privilege_group grp,sys_privilege_item item
+  		where grp.id=item.grp_id and grp.status=1 and grp.id in 
+  		( select priv.grp_id from sys_privilege_item priv where priv.status=1 and priv.id in 
+			( select vup.priv_id from view_user_priv vup where vup.user_id=${userId} )
+  		)
+  		order by grp.tree_code
+  </select>
+  <select id="selectBySuperuser" resultMap="BaseResultMap">
+  		select grp.*,item.id as item_id,item.grp_id as grp_id,
+  		item.code as item_code,item.name as item_name,item.is_role_dis as is_role_dis
+  		 from sys_privilege_group grp,sys_privilege_item item
+  		where grp.id=item.grp_id and grp.status=1
+  		order by grp.tree_code
+  </select>
+</mapper>

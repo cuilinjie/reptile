@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.clj.reptilehouse.system.dao.SysUserDao" >
+  <resultMap id="BaseResultMap" type="com.clj.reptilehouse.system.entity.SysUser" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="org_id" property="orgId" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="BIT" />
+    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+    <result column="login_pwd" property="loginPwd" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="skin_name" property="skinName" jdbcType="VARCHAR" />
+    <result column="menu_style" property="menuStyle" jdbcType="VARCHAR" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="creator_type" property="creatorType" jdbcType="INTEGER" />
+    <result column="modifier" property="modifier" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="BIGINT" />
+    <result column="modified_time" property="modifiedTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, org_id, role_id, `type`, login_name, login_pwd, username, email, mobile, skin_name, 
+    menu_style, last_login_time, `status`, creator, creator_type, modifier, remark, created_time, 
+    modified_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.clj.reptilehouse.system.entity.SysUser" >
+    insert into sys_user (id, org_id, role_id, 
+      `type`, login_name, login_pwd, 
+      username, email, mobile, 
+      skin_name, menu_style, last_login_time, 
+      `status`, creator, creator_type, 
+      modifier, remark, created_time, 
+      modified_time)
+    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, 
+      #{type,jdbcType=BIT}, #{loginName,jdbcType=VARCHAR}, #{loginPwd,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{skinName,jdbcType=VARCHAR}, #{menuStyle,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=BIGINT}, 
+      #{status,jdbcType=BIT}, #{creator,jdbcType=VARCHAR}, #{creatorType,jdbcType=INTEGER}, 
+      #{modifier,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createdTime,jdbcType=BIGINT}, 
+      #{modifiedTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clj.reptilehouse.system.entity.SysUser" >
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      id,
+      org_id,
+      role_id,
+      `type`,
+      login_name,
+      login_pwd,
+      username,
+      email,
+      mobile,
+      skin_name,
+      menu_style,
+      last_login_time,
+      `status`,
+      creator,
+      creator_type,
+      modifier,
+      remark,
+      created_time,
+      modified_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=BIGINT},
+      #{orgId,jdbcType=BIGINT},
+      #{roleId,jdbcType=BIGINT},
+      #{type,jdbcType=BIT},
+      #{loginName,jdbcType=VARCHAR},
+      #{loginPwd,jdbcType=VARCHAR},
+      #{username,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR},
+      #{mobile,jdbcType=VARCHAR},
+      #{skinName,jdbcType=VARCHAR},
+      #{menuStyle,jdbcType=VARCHAR},
+      #{lastLoginTime,jdbcType=BIGINT},
+      #{status,jdbcType=BIT},
+      #{creator,jdbcType=VARCHAR},
+      #{creatorType,jdbcType=INTEGER},
+      #{modifier,jdbcType=VARCHAR},
+      #{remark,jdbcType=VARCHAR},
+      #{createdTime,jdbcType=BIGINT},
+      #{modifiedTime,jdbcType=BIGINT},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clj.reptilehouse.system.entity.SysUser" >
+    update sys_user
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        `type` = #{type,jdbcType=BIT},
+      </if>
+      <if test="loginName != null" >
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null" >
+        login_pwd = #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="skinName != null" >
+        skin_name = #{skinName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuStyle != null" >
+        menu_style = #{menuStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time = #{lastLoginTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        `status` = #{status,jdbcType=BIT},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorType != null" >
+        creator_type = #{creatorType,jdbcType=INTEGER},
+      </if>
+      <if test="modifier != null" >
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=BIGINT},
+      </if>
+      <if test="modifiedTime != null" >
+        modified_time = #{modifiedTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clj.reptilehouse.system.entity.SysUser" >
+    update sys_user
+    set org_id = #{orgId,jdbcType=BIGINT},
+      role_id = #{roleId,jdbcType=BIGINT},
+      `type` = #{type,jdbcType=BIT},
+      login_name = #{loginName,jdbcType=VARCHAR},
+      login_pwd = #{loginPwd,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      skin_name = #{skinName,jdbcType=VARCHAR},
+      menu_style = #{menuStyle,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=BIGINT},
+      `status` = #{status,jdbcType=BIT},
+      creator = #{creator,jdbcType=VARCHAR},
+      creator_type = #{creatorType,jdbcType=INTEGER},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=BIGINT},
+      modified_time = #{modifiedTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!-- my start -->
+  <select id="list" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/> from sys_user
+		<where>${_parameter}</where>
+  </select>
+  <select id="selectByLoginName" resultMap="BaseResultMap" parameterType="String" >
+	    select 
+	    <include refid="Base_Column_List" />
+	    from sys_user
+	    where login_name = #{loginName}
+  </select>
+  <!-- 批量更新 -->
+  <update id="updateBatch" parameterType="java.util.List" >
+  <foreach collection="list" item="item" index="index" separator=";">  
+    update sys_user
+    <set> org_id = #{orgId,jdbcType=BIGINT},
+      role_id = #{roleId,jdbcType=BIGINT},
+      `type` = #{type,jdbcType=BIT},
+      login_name = #{loginName,jdbcType=VARCHAR},
+      login_pwd = #{loginPwd,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      skin_name = #{skinName,jdbcType=VARCHAR},
+      menu_style = #{menuStyle,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=BIGINT},
+      `status` = #{status,jdbcType=BIT},
+      creator = #{creator,jdbcType=VARCHAR},
+      creator_type = #{creatorType,jdbcType=INTEGER},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=BIGINT},
+      modified_time = #{modifiedTime,jdbcType=BIGINT}
+      </set>
+    where id = #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <!-- 用户批量导入 -->
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into sys_user (id,org_id,role_id, `type`, login_name,login_pwd, username, email, 
+      mobile,skin_name,menu_style,last_login_time, 
+      `status`, creator, creator_type,modifier, remark, created_time,modified_time,end_time) values 
+    <foreach collection="list" item="item" index="index" separator=",">  
+    (#{item.id,jdbcType=BIGINT}, #{item.orgId,jdbcType=BIGINT},#{item.roleId,jdbcType=BIGINT}, #{item.type,jdbcType=BIT},
+     #{item.loginName,jdbcType=VARCHAR},#{item.loginPwd,jdbcType=VARCHAR},#{item.username,jdbcType=VARCHAR}, 
+     #{item.email,jdbcType=VARCHAR},#{item.mobile,jdbcType=VARCHAR},#{skinName,jdbcType=VARCHAR},#{menuStyle,jdbcType=VARCHAR},
+     #{item.lastLoginTime,jdbcType=BIGINT},#{item.status,jdbcType=BIT},#{item.creator,jdbcType=VARCHAR},#{item.creatorType,jdbcType=INTEGER}, 
+     #{item.modifier,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, #{item.createdTime,jdbcType=BIGINT}, 
+     #{item.modifiedTime,jdbcType=BIGINT},#{item.endTime,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+  <select id="ListById" resultMap="BaseResultMap">
+		select u.*,r.name roleName from sys_user u  
+		left join sys_role r on u.role_id = r.id 
+		where u.id = #{id,jdbcType=BIGINT} 
+  </select>
+  <!-- 根据用户id查询所辖用户 -->
+  <select id="selectSubUsersByUid" resultMap="BaseResultMap">
+  	SELECT u.* FROM sys_user u,sys_organization o 
+	 WHERE u.org_id=o.id  AND o.tree_code LIKE 
+	 (SELECT CONCAT(o1.tree_code,'%') FROM 
+	 sys_organization o1,sys_user u1 
+	 WHERE u1.org_id=o1.id AND u1.id=#{userId})
+  </select>
+  <!-- 根据用户机构id查询所辖用户 -->
+  <select id="selectSubUsersByOid" resultMap="BaseResultMap">
+  	SELECT u.* FROM sys_user u,sys_organization o 
+	 WHERE u.org_id=o.id  AND o.tree_code LIKE 
+	 (SELECT CONCAT(o1.tree_code,'%') FROM sys_organization o1 
+	 WHERE o1.id=#{orgId})
+  </select>
+  <!-- 人员重新分组 -->
+  <update id="membersMoveById" >
+  	 update sys_user
+    <set> 
+    	org_id = #{orgId,jdbcType=BIGINT} 
+    </set>
+    where id in (#{ids})
+  </update>
+  <!-- 人员重新分组 根据机构id  -->
+  <update id="membersMoveByOrgId" >
+  	 update sys_user 
+    <set> 
+    	org_id = #{targetOrgId,jdbcType=BIGINT} 
+    </set>
+    where org_id=#{originOrgId}
+  </update>
+</mapper>

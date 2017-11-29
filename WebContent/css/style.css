@@ -1,0 +1,106 @@
+select, textarea, input[type='text'], input[type='password'], input[type='datetime'], input[type='datetime-local'], input[type='date'], input[type='month'], input[type='time'], input[type='week'], input[type='number'], input[type='email'], input[type='url'], input[type='search'], input[type='tel'], input[type='color'], .uneditable-input{
+	vertical-align: inherit;
+}
+dl.list{
+	margin:1% 0;
+	
+}
+
+dl.list dt{
+	float:left;
+	display:inline-block;
+	width:49.5%;
+	
+	height:30px;
+	line-height:30px;
+}
+
+dl.list dt label{
+	height:30px;
+	float:left;
+	display:inline-block;
+	line-height:30px;
+	font-weight:bold;
+	font-family: ����;
+	font-size:14px;
+	width:42%;
+	text-align:right;
+}
+dl.list dt .content{
+	text-align:left;
+	width:65%;
+	font-weight:normal;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+dl.mr10 dt{
+	margin-top:5px;
+}
+dl.line-height50 dt{
+	height:50px;
+	line-height:50px;
+}
+dl.line-height50 dt label{
+	height:50px;
+	line-height:50px;
+}
+dl.line-height50 dt .content{
+	width:auto;
+}
+dl.list_w50 dt label{
+	 width:42%; 
+}
+
+dl.list_w50 dt .content{
+	width:55%;
+}
+dl.list_m5 dt{
+	/* margin-left:5%; */
+} 
+
+dl.list_w100 dt{
+	width:90%;
+}
+
+dl.list_w100 dt label{
+	width:15%;
+}
+dl.list_w100 dt .content{
+	width:30%;
+}
+dl.list_w100 dt input,dl.list_w100 dt select{
+	/* width:30%; */
+}
+
+nav.footer{
+	padding:10px 10px 10px 0;
+	border:1px solid rgb(204, 204, 204);
+	background:rgb(245,245,245);
+	border-radius:5px;
+	text-align:right;
+}
+input.has-error{
+	border-color: #843534;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+ 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+}
+
+button.btn-success{
+	border-color:#3eb8e5;
+	background:#2ca0ca;
+	color:#fff;
+}
+button.btn{
+	display:inline-block;
+	padding:5px 12px;
+	margin-bottom:0px;
+	font-size:14px;
+	font-weight:400;
+	line-height:1.4285;
+	text-align:center;
+	white-space:nowrap;
+	user-select:none;
+	border:1px solid transparent;
+	border-radius:4px;
+}

@@ -1,0 +1,6 @@
+.menu-icon{width:16px; height:16px; overflow:hidden; background-color:transparent;}
+.pos1{position:absolute; left:5px; top:5px;}
+.pos2{position:relative; float:left; left:-2px; top:7px;}
+.menu-icon-system{ background:url('../icon/system.gif') no-repeat;}
+.menu-icon-role{ background:url('../icon/role.gif') no-repeat;}
+

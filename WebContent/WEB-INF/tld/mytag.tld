@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<taglib>
+	<tlibversion>1.0</tlibversion>
+	<jspversion>1.0</jspversion>
+	<shortname>s</shortname>
+	<uri>/mytld</uri>
+	<info>create by jxs</info>
+
+    <tag>  
+        <name>date</name>  
+        <tag-class>com.clj.reptilehouse.common.tag.DateTimeTag</tag-class>          
+        <body-content>JSP</body-content>  
+        <attribute>  
+            <name>value</name>  
+            <required>true</required>  
+            <rtexprvalue>true</rtexprvalue>  
+        </attribute>  
+        <attribute>
+        	<name>format</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>  
+    
+    <tag>
+        <name>paramChk</name>
+        <tagclass>com.clj.reptilehouse.common.tag.ParamCheckTag</tagclass>
+        <attribute>
+        	<name>paramCode</name>
+        	<required>true</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>checkWay</name>
+        	<required>true</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>checkValue</name>
+        	<required>true</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+	</tag>
+	
+	<tag>
+        <name>resSelect</name>
+        <tagclass>com.clj.reptilehouse.common.tag.ResSelectTag</tagclass>
+        <attribute>
+        	<name>code</name>
+        	<required>true</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>        
+        <attribute>
+        	<name>filter</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>order</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>value</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>prompt</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>promptValue</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>id</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>name</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>style</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>lclass</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>ltype</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>onchange</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>onblur</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+	</tag>
+	
+	<tag>
+        <name>objSelect</name>
+        <tagclass>com.clj.reptilehouse.common.tag.ObjSelectTag</tagclass>
+        <attribute>
+        	<name>objName</name>
+        	<required>true</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>        
+        <attribute>
+        	<name>textAtt</name>
+        	<required>true</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>        
+        <attribute>
+        	<name>valueAtt</name>
+        	<required>true</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>     
+        <attribute>
+        	<name>treeCodeAtt</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>        
+        <attribute>
+        	<name>treeLevelLen</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>        
+        <attribute>
+        	<name>filter</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>order</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>value</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>prompt</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>promptValue</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>id</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>name</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>style</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>lclass</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>ltype</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>onchange</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<name>onblur</name>
+        	<required>false</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
+	</tag>
+		
+    <function>
+ 		<description>根据资源编码获取资源内容</description>
+	    <name>resVal</name>
+	    <function-class>com.clj.reptilehouse.common.util.WebFuncUtil</function-class>
+	    <function-signature>String getResValue(java.lang.String, java.lang.String)</function-signature>
+	    <example>
+	      value: ${s:resVal("资源组编码","资源编码")}
+	    </example>  
+ 	</function>    
+ 		
+    <function>
+ 		<description>根据资源编码获取资源内容</description>
+	    <name>resValue</name>
+	    <function-class>com.clj.reptilehouse.common.util.WebFuncUtil</function-class>
+	    <function-signature>String getResValue(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	    <example>
+	      value: ${s:resValue("资源组编码","资源编码","缺省返回值")}
+	    </example>  
+ 	</function>    	
+    
+    <function>
+ 		<description>根据参数编码获取参数值</description>
+	    <name>paramVal</name>
+	    <function-class>com.clj.reptilehouse.common.util.WebFuncUtil</function-class>
+	    <function-signature>String getParamValue(java.lang.String)</function-signature>
+	    <example>
+	      value: ${s:paramVal("参数编码")}
+	    </example>  
+ 	</function>   
+ 	 	
+    <function>
+ 		<description>根据参数编码获取参数值</description>
+	    <name>paramValue</name>
+	    <function-class>com.clj.reptilehouse.common.util.WebFuncUtil</function-class>
+	    <function-signature>String getParamValue(java.lang.String, java.lang.String)</function-signature>
+	    <example>
+	      value: ${s:paramValue("参数编码", "缺省返回值")}
+	    </example>  
+ 	</function>    	
+ 	
+     <function>
+ 		<description>根据指定对象的指定字段值，获取另一字段值</description>
+	    <name>objColVal</name>
+	    <function-class>com.clj.reptilehouse.common.util.WebFuncUtil</function-class>
+	    <function-signature>String getObjColValue(java.lang.String, java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	    <example>
+	      value: ${s:objColVal("实体对象名","编码字段","名称字段", "编码字段值")}
+	    </example>  
+ 	</function>
+ 	
+     <function>
+ 		<description>根据指定对象的指定字段值，获取另一字段值</description>
+	    <name>objColValue</name>
+	    <function-class>com.clj.reptilehouse.common.util.WebFuncUtil</function-class>
+	    <function-signature>String getObjColValue(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	    <example>
+	      value: ${s:objColValue("实体对象名","编码字段","名称字段", "编码值", "缺省返回值")}
+	    </example>  
+ 	</function>
+
+    <function>
+ 		<description>获取资源列表（json格式）</description>
+	    <name>resJsonList</name>
+	    <function-class>com.clj.reptilehouse.common.util.WebFuncUtil</function-class>
+	    <function-signature>String getResJsonList(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	    <example>
+	      value: ${s:resJsonList("资源组编码","过滤条件","json属性名称（资源编码,资源名称）")}
+	    </example>  
+ 	</function>    	
+
+    <function>
+ 		<description>获取资源树（json格式）</description>
+	    <name>resJsonTree</name>
+	    <function-class>com.clj.reptilehouse.common.util.WebFuncUtil</function-class>
+	    <function-signature>String getResJsonTree(java.lang.String, java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	    <example>
+	      value: ${s:resJsonTree("资源组编码","过滤条件","json属性名称（资源编码,资源名称）", "子属性名称")}
+	    </example>  
+ 	</function>
+ 
+    <function>
+ 		<description>获取指定对象列表（json格式）</description>
+	    <name>objJsonList</name>
+	    <function-class>com.clj.reptilehouse.common.util.WebFuncUtil</function-class>
+	    <function-signature>String getObjJsonList(java.lang.String, java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	    <example>
+	      value: ${s:objJsonList("对象实体名称","过滤条件","对象属性名称（以逗号间隔）","json属性名称（以逗号间隔,顺序与对象属性保持一致）")}
+	    </example>  
+ 	</function>    	
+
+    <function>
+ 		<description>获取指定对象树（json格式）</description>
+	    <name>objJsonTree</name>
+	    <function-class>com.clj.reptilehouse.common.util.WebFuncUtil</function-class>
+	    <function-signature>String getObjJsonTree(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	    <example>
+	      value: ${s:objJsonTree("对象实体名称","过滤条件","对象属性名称（以逗号间隔）","json属性名称（以逗号间隔,顺序与对象属性保持一致）", "子属性名称")}
+	    </example>  
+ 	</function>
+    
+    <function>
+ 		<description>IP值转IP地址</description>
+	    <name>long2Ip</name>
+	    <function-class>com.clj.reptilehouse.common.util.WebFuncUtil</function-class>
+	    <function-signature>String long2Ip(java.lang.Long)</function-signature>
+	    <example>
+	      value: ${s:long2Ip(IP值)}
+	    </example>  
+ 	</function>    	
+    
+    <function>
+ 		<description>获取页面标题内容</description>
+	    <name>titleContent</name>
+	    <function-class>com.clj.reptilehouse.common.util.WebFuncUtil</function-class>
+	    <function-signature>String titleContent(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+	    <example>
+	      value: ${s:titleContent("菜单名称", "功能模块", "web路径")}
+	    </example>  
+ 	</function>    	
+    
+ 		
+</taglib>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.clj.reptilehouse.system.dao.SysOperatorLogDao" >
+  <resultMap id="BaseResultMap" type="com.clj.reptilehouse.system.entity.SysOperatorLog" >
+    <id column="operator_time" property="operatorTime" jdbcType="BIGINT" />
+    <result column="log_type" property="logType" jdbcType="INTEGER" />
+    <result column="operator_model" property="operatorModel" jdbcType="VARCHAR" />
+    <result column="operator_action" property="operatorAction" jdbcType="INTEGER" />
+    <result column="operator_persion" property="operatorPersion" jdbcType="VARCHAR" />
+    <result column="client_ipaddr" property="clientIpaddr" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.clj.reptilehouse.system.entity.SysOperatorLog" extends="BaseResultMap" >
+    <result column="operator_context" property="operatorContext" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    operator_time, log_type, operator_model, operator_action, operator_persion, client_ipaddr, 
+    insert_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    operator_context
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_operator_log
+    where operator_time = #{operatorTime,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_operator_log
+    where operator_time = #{operatorTime,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.clj.reptilehouse.system.entity.SysOperatorLog" >
+    insert into sys_operator_log (operator_time, log_type, operator_model, 
+      operator_action, operator_persion, client_ipaddr, 
+      insert_time, operator_context)
+    values (#{operatorTime,jdbcType=BIGINT}, #{logType,jdbcType=INTEGER}, #{operatorModel,jdbcType=VARCHAR}, 
+      #{operatorAction,jdbcType=INTEGER}, #{operatorPersion,jdbcType=VARCHAR}, #{clientIpaddr,jdbcType=VARCHAR}, 
+      #{insertTime,jdbcType=BIGINT}, #{operatorContext,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clj.reptilehouse.system.entity.SysOperatorLog" >
+    insert into sys_operator_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      operator_time,
+      log_type,
+      operator_model,
+      operator_action,
+      operator_persion,
+      client_ipaddr,
+      insert_time,
+      operator_context,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{operatorTime,jdbcType=BIGINT},
+      #{logType,jdbcType=INTEGER},
+      #{operatorModel,jdbcType=VARCHAR},
+      #{operatorAction,jdbcType=INTEGER},
+      #{operatorPersion,jdbcType=VARCHAR},
+      #{clientIpaddr,jdbcType=VARCHAR},
+      #{insertTime,jdbcType=BIGINT},
+      #{operatorContext,jdbcType=LONGVARCHAR},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clj.reptilehouse.system.entity.SysOperatorLog" >
+    update sys_operator_log
+    <set >
+      <if test="logType != null" >
+        log_type = #{logType,jdbcType=INTEGER},
+      </if>
+      <if test="operatorModel != null" >
+        operator_model = #{operatorModel,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorAction != null" >
+        operator_action = #{operatorAction,jdbcType=INTEGER},
+      </if>
+      <if test="operatorPersion != null" >
+        operator_persion = #{operatorPersion,jdbcType=VARCHAR},
+      </if>
+      <if test="clientIpaddr != null" >
+        client_ipaddr = #{clientIpaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=BIGINT},
+      </if>
+      <if test="operatorContext != null" >
+        operator_context = #{operatorContext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where operator_time = #{operatorTime,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.clj.reptilehouse.system.entity.SysOperatorLog" >
+    update sys_operator_log
+    set log_type = #{logType,jdbcType=INTEGER},
+      operator_model = #{operatorModel,jdbcType=VARCHAR},
+      operator_action = #{operatorAction,jdbcType=INTEGER},
+      operator_persion = #{operatorPersion,jdbcType=VARCHAR},
+      client_ipaddr = #{clientIpaddr,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=BIGINT},
+      operator_context = #{operatorContext,jdbcType=LONGVARCHAR}
+    where operator_time = #{operatorTime,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clj.reptilehouse.system.entity.SysOperatorLog" >
+    update sys_operator_log
+    set log_type = #{logType,jdbcType=INTEGER},
+      operator_model = #{operatorModel,jdbcType=VARCHAR},
+      operator_action = #{operatorAction,jdbcType=INTEGER},
+      operator_persion = #{operatorPersion,jdbcType=VARCHAR},
+      client_ipaddr = #{clientIpaddr,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=BIGINT}
+    where operator_time = #{operatorTime,jdbcType=BIGINT}
+  </update>
+   <!-- my start -->
+  <select id="list" parameterType="string" resultMap="ResultMapWithBLOBs">
+		select <include refid="Base_Column_List"/> ,  <include refid="Blob_Column_List" /> from sys_operator_log
+		<where>${_parameter}</where>
+  </select>
+</mapper>

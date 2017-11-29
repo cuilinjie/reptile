@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bean头部 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd  
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd  
+            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd              
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+             http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop.xsd 
+            http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 配置SqlSessionFactoryBean -->
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="multipleDataSource" />
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
+		<property name="mapperLocations" value="classpath*:mybatis/mapper/**/*.xml" />
+	</bean> 
+	<!-- DAO接口所在包名，Spring会自动查找其下的类 --> 
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.clj.**.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean>
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED"
+				rollback-for="Exception" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="change*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="exec*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<bean id="multipleDataSource" class="com.clj.reptilehouse.summary.datebase.MultipleDataSource">
+        <property name="defaultTargetDataSource" ref="dataSource"/>
+        <property name="targetDataSources">
+            <map>
+                <entry key="dataSource" value-ref="dataSource"/>
+            </map>
+        </property>
+    </bean>
+    
+	<!-- 配置Ibatis的sqlMapClient -->
+	
+	<!--创建jdbc数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${mysql.driverClassName}" />
+		<property name="url" value="${mysql.url}" />
+		<property name="username" value="${mysql.username}" />
+		<property name="password" value="${mysql.password}" />
+		<property name="maxActive" value="${mysql.maxActive}" />
+		<property name="maxIdle" value="${mysql.maxIdle}" />
+		<!-- 数据库连接超时时间 -->
+	
+		<!-- 超时等待 -->
+		<property name="maxWait" value="${mysql.maxWait}" />
+		<property name="initialSize" value="${mysql.initialSize}" />
+		<property name="validationQuery" value="SELECT 1"></property>
+		<property name="testWhileIdle" value="true"></property>
+		<property name="testOnBorrow" value="true"></property>
+	</bean>
+		<!-- 事务管理器 -->
+<!--      <bean id="transactionManager"
+         class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+         <property name="dataSource" ref="dataSource"></property>
+     </bean> -->
+
+	<!-- 使用annotation定义事务 --> 
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" /> 
+	<bean id="springContextHolder" class="org.springside.modules.utils.spring.SpringContextHolder" lazy-init="false" /> 
+</beans>

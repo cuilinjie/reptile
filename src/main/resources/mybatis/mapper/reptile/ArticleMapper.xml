@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.clj.reptilehouse.reptile.dao.ArticleDao" >
+  <resultMap id="article" type="com.clj.reptilehouse.reptile.entity.Article" >
+    <result column="id" property="id"/>
+    <result column="source_id" property="sourceId" />
+    <result column="source_author_id" property="sourceAuthorId" />
+    <result column="source_author_name" property="sourceAuthorName" />
+    <result column="title" property="title" />
+    <result column="short_title" property="shortTitle" />
+    <result column="source_url" property="sourceUrl" />
+    <result column="source_publish_time" property="sourcePublishTime" />
+    <result column="comment_num" property="commentNum" />
+    <result column="liked_num" property="likedNum" />
+    <result column="collected_num" property="collectedNum" />
+    <result column="collect_time" property="collectTime" />
+    <result column="publish_status" property="publishStatus" />
+    <result column="content" property="content" />
+    <result column="has_video" property="hasVideo" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+   id,source_id,title,source_url,comment_num,liked_num,collected_num,date_format(collect_time,'%Y-%m-%d %H:%i:%s')collect_time,has_video,content
+  </sql>
+  <select id="listPagination" resultMap="article" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_article
+    where 1=1
+    <if test='startTime != null and startTime !=""'>
+     and collect_time>=#{startTime}
+    </if>
+    <if test='endTime != null and endTime !=""'>
+     and collect_time &lt;= #{endTime}
+    </if>
+    <if test='hasVideo != null and hasVideo != ""'>
+     and has_video = #{hasVideo}
+    </if>
+    order by collect_time desc
+    limit #{offset},#{pageSize}
+  </select>
+  <select id="count" resultType="int" >
+     select count(*)   from t_article
+    where 1=1
+   <if test='startTime != null and startTime !=""'>
+     and collect_time>=#{startTime}
+    </if>
+    <if test='endTime != null and endTime !=""'>
+     and collect_time &lt;= #{endTime}
+    </if>
+    <if test='hasVideo != null and hasVideo != ""'>
+     and has_video = #{hasVideo}
+    </if>
+  </select>
+  <insert id="insert">
+    insert into t_article (id,source_id,source_author_id,source_author_name,source,
+    title,short_title,source_url,source_publish_time,comment_num,liked_num,collected_num,collect_time,publish_status,content,has_video)
+    values (#{article.id},
+    #{article.sourceId},
+    #{article.sourceAuthorId},
+    #{article.sourceAuthorName},
+    #{article.source},
+    #{article.title},
+    #{article.shortTitle},
+    #{article.sourceUrl},
+    #{article.sourcePublishTime},
+    #{article.commentNum},
+    #{article.likedNum},
+    #{article.collectedNum},
+    #{article.collectTime},
+    #{article.publishStatus},
+    #{article.content},
+    #{article.hasVideo})
+  </insert>
+  <select id="selectById" resultMap="article">
+		select <include refid="Base_Column_List"/> from t_article
+		where id = #{id}
+  </select>
+</mapper>

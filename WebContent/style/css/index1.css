@@ -1,0 +1,29 @@
+body,html{width:100%; height:100%; padding:0; margin:0; overflow:hidden;} 
+#index-top{ height:60px; background:#152A49; color:#FFFFFF; margin-bottom:3px; background:url(../img/top-bg.jpg) top left repeat-x;}
+#layout-index{width:100%; height:100%;}
+#index-accordion{overflow:auto;}
+#index-bottom{width:100%; height:100%; background:url(../img/bottom.png) right top;text-align:center;}
+#index-bottom td{font-size:12px;text-align:center; text-align:-moz-center;padding:2px;}
+#index-treeMenu{margin-top:3px;}
+.top_logo{
+	background:url(../img/logo.png) no-repeat 30px 2px;
+	width:300px; height:73px; vertical-align:middle;
+	float:left;}
+.top_sysname {
+    margin-left: 10px;
+    color: #fff;
+    height: 60px;
+    line-height: 60px;
+    font-size: 26px;
+    font-weight: bold;
+    width: 400px;
+    display:inline;
+}	
+.top_qbar{height:29px;line-height:29px;margin-right:10px}
+.top_qbar li{ float:left;padding-left:18px;height:29px;font-size:12px;line-height:29px;list-style:none;color:#0066cc;margin-right:5px;}
+.top_qbar li a{color:#0066cc;margin-right:4px;font-size:12px;}
+.home{background: url(../img/home.gif) no-repeat  center left;}
+.configure{background: url(../img/configure.png) no-repeat  center left;}
+.help_topic{background: url(../img/help_topic.gif) no-repeat  center left;}
+.help_view{background: url(../img/help_view.gif) no-repeat  center left;}
+.goback{background: url(../img/goback.gif) no-repeat  center left;}

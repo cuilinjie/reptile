@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.clj.reptilehouse.system.dao.SysResItemDao" >
+  <resultMap id="BaseResultMap" type="com.clj.reptilehouse.system.entity.SysResItem" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="grp_id" property="grpId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="no" property="no" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="tree_code" property="treeCode" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="BIGINT" />
+    <result column="modified_time" property="modifiedTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, grp_id, `name`, code, `no`, `status`, parent_id, tree_code, remark, created_time, 
+    modified_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_res_item
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_res_item
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.clj.reptilehouse.system.entity.SysResItem" >
+    insert into sys_res_item (id, grp_id, `name`, 
+      code, `no`, `status`, parent_id, 
+      tree_code, remark, created_time, 
+      modified_time)
+    values (#{id,jdbcType=BIGINT}, #{grpId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{no,jdbcType=INTEGER}, #{status,jdbcType=BIT}, #{parentId,jdbcType=BIGINT}, 
+      #{treeCode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createdTime,jdbcType=BIGINT}, 
+      #{modifiedTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clj.reptilehouse.system.entity.SysResItem" >
+    insert into sys_res_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      id,
+      grp_id,
+      `name`,
+      code,
+      `no`,
+      `status`,
+      parent_id,
+      tree_code,
+      remark,
+      created_time,
+      modified_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=BIGINT},
+      #{grpId,jdbcType=BIGINT},
+      #{name,jdbcType=VARCHAR},
+      #{code,jdbcType=VARCHAR},
+      #{no,jdbcType=INTEGER},
+      #{status,jdbcType=BIT},
+      #{parentId,jdbcType=BIGINT},
+      #{treeCode,jdbcType=VARCHAR},
+      #{remark,jdbcType=VARCHAR},
+      #{createdTime,jdbcType=BIGINT},
+      #{modifiedTime,jdbcType=BIGINT},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clj.reptilehouse.system.entity.SysResItem" >
+    update sys_res_item
+    <set >
+      <if test="grpId != null" >
+        grp_id = #{grpId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="no != null" >
+        `no` = #{no,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        `status` = #{status,jdbcType=BIT},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="treeCode != null" >
+        tree_code = #{treeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=BIGINT},
+      </if>
+      <if test="modifiedTime != null" >
+        modified_time = #{modifiedTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clj.reptilehouse.system.entity.SysResItem" >
+    update sys_res_item
+    set grp_id = #{grpId,jdbcType=BIGINT},
+      `name` = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      `no` = #{no,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=BIT},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      tree_code = #{treeCode,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=BIGINT},
+      modified_time = #{modifiedTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- my start -->
+  <select id="list" parameterType="string" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/> from sys_res_item
+		<where>${_parameter}</where>
+  </select>
+  <select id="listBy" parameterType="string" resultType="com.clj.reptilehouse.common.SampleResItem">
+		select i.name name,i.code value,i.tree_code treeCode,g.type type from sys_res_item i,sys_res_group g 
+		where i.grp_id = g.id and i.status=1 and ${_parameter}
+  </select>
+  <select id="listFrom" parameterType="string" resultType="com.clj.reptilehouse.common.SampleResItem">
+		${_parameter}
+  </select>
+  <select id="selectNameBy" resultType="String" parameterType="string">
+  		select i.name from sys_res_item i,sys_res_group g where 
+  		i.grp_id = g.id and g.code=#{grpCode} and i.code =#{itemCode} 
+  		order by i.no,tree_code
+  </select>
+  <select id="selectCodeBy" resultType="String" parameterType="string">
+  		select i.code from sys_res_item i,sys_res_group g where 
+  		i.grp_id = g.id and g.code=#{grpCode} and i.name =#{name} 
+  		order by i.no,i.tree_code
+  </select>
+  <delete id="deleteByGrpId" parameterType="java.lang.Long" >
+    delete from sys_res_item
+    where grp_id = #{grpId,jdbcType=BIGINT}
+  </delete>
+  <select id="selectMaxNoByGrpId" parameterType="long" resultType="int">
+  		select max(`no`) from sys_res_item 
+  		where grp_id = #{grpId,jdbcType=BIGINT}
+  </select>
+  <select id="selectMaxCode" parameterType="string" resultType="java.lang.String">
+		select max(tree_code) from sys_res_item
+		<where>${_parameter}</where>
+  </select>
+   <update id="updateNo">
+	    update sys_res_item
+	    set `no`=(`no`-1)
+	    where grp_id=${grpId} and `no` &gt; ${no}
+  </update>
+</mapper>
